@@ -1,0 +1,18 @@
+.teams-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.teams-list > * {
+  width: 300px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.teams-list .link {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}

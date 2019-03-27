@@ -1,0 +1,14 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.header {
+  font-size: 25px;
+  padding: 25px;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
