@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Filter from '../Filter/Filter';
 
-import './Team.css';
+import './List.css';
 
 export default class List extends Component {
   state = {
@@ -27,7 +27,7 @@ export default class List extends Component {
     const ListComponent = listComponent;
 
     return (
-      <React.Fragment>
+      <div className="list">
         <h3>
           {title}
         </h3>
@@ -35,12 +35,10 @@ export default class List extends Component {
           placeholder={placeholder}
           onChange={this.onChange}
         />
-        <div className="players">
-          {filtered.map(player => (
-            <ListComponent player={player} />
-          ))}
+        <div className="elems">
+          {filtered.map(item => <ListComponent item={item} />)}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 };

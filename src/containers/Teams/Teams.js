@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchTeams } from '../../services/MockApi';
+import { fetchTeams } from '../../services/Api';
 import TeamCard from '../../components/TeamCard/TeamCard';
 
 import './Teams.css';
@@ -13,7 +13,7 @@ export default class Teams extends Component {
 
     fetchTeams()
       .then(response => this.setState({
-        teams: response.result,
+        teams: response,
         error: false,
         loading: false,
       }))

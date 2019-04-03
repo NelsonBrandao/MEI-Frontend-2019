@@ -1,17 +1,11 @@
-.team {
+.list {
   display: flex;
   align-items: center;
   justify-items: center;
   flex-direction: column;
 }
 
-.team img {
-  max-width: 100px;
-  height: 100px;
-}
-
-.team .players,
-.team .games {
+.list .elems {
   display: flex;
   min-width: 800px;
   flex-direction: column;

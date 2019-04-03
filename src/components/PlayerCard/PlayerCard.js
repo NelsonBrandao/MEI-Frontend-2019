@@ -2,9 +2,9 @@ import React from 'react';
 
 import './PlayerCard.css';
 
-const PlayerCard = ({ player }) => {
+const PlayerCard = ({ item: player }) => {
   return (
-    <div className="player-car">
+    <div className="player-card">
       <div className="left">
         <h3 className="name">{player.player_name}</h3>
         <small>

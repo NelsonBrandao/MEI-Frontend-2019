@@ -14,6 +14,7 @@ class App extends Component {
           <Link className="header" to="/">
             Futebool All Time
           </Link>
+          <div className="links"></div>
           <Route exact path="/" component={Teams} />
           <Route path="/teams/:id" component={Team} />
         </Router>

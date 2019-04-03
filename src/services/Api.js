@@ -1,30 +1,59 @@
-import { API_KEY } from '../config';
+const STATS_BASE_URL = 'http://localhost:4000';
+const USER_BASE_URL = 'http://localhost:4001';
 
-const BASE_URL = 'https://allsportsapi.com';
-const PT_CODE = '115';
-const PT_LEAGUE = '391';
-
-const generateUrl = (path, params = []) => {
+const generateUrl = (base, path, params = []) => {
   const strParams = Object.entries(params)
     .map(([ key, value ]) => `${key}=${value}`)
     .join('&');
 
-  return `${BASE_URL}${path}&APIkey=${API_KEY}&${strParams}`;
+  return [
+    `${base}${path}`,
+    strParams
+  ]
+    .filter(value => value)
+    .join('?');
 };
 
-const jsonFetch = (...args) => fetch(...args).then(response => response.json())
+const jsonFetch = (url, options = {}) => (
+  fetch(
+    url,
+    {
+      ...options,
+      headers: {
+        ...(options.headers || {}),
+        'Content-Type': 'application/json'
+      },
+      body: options.body ? JSON.stringify(options.body) : options.body,
+    }
+  )
+    .then(response => response.json())
+)
 
-export const fetchTeams = (leagueId = PT_LEAGUE) => (
-  jsonFetch(generateUrl('/api/football/?met=Teams', { leagueId }))
+export const fetchTeams = () => jsonFetch(generateUrl(STATS_BASE_URL, '/teams'));
+export const fetchTeam = (teamId) => jsonFetch(generateUrl(STATS_BASE_URL, `/teams/${teamId}`));
+export const fetchFixtures = () => jsonFetch(generateUrl(STATS_BASE_URL, '/fixtures'));
+
+export const login = (body) => (
+  jsonFetch(generateUrl(USER_BASE_URL, '/login'), { method: 'post', body })
 );
-
-export const fetchTeam = (teamId, leagueId = PT_LEAGUE) => (
-  jsonFetch(generateUrl('/api/football/?met=Teams', { leagueId }))
-    .then(response => (
-      (response.result || []).find(team => team.team_key === teamId)
-    ))
+export const signup = (body) => (
+  jsonFetch(generateUrl(USER_BASE_URL, '/signup'), { method: 'post', body })
 );
-
-export const fetchFixtures = (from = '2019-01-01', to = '2019-05-01', leagueId = PT_LEAGUE) => (
-  jsonFetch(generateUrl('/api/football/?met=Fixtures', { from, to, leagueId }))
+export const fetchFavoriteTeams = (token) => (
+  jsonFetch(
+    generateUrl(USER_BASE_URL, `/favorite`),
+    {
+      method: 'get',
+      headers: { authorization: token ? `Bearer ${token}` : undefined }
+    }
+  )
+);
+export const setFavoriteTeam = (teamId, token) => (
+  jsonFetch(
+    generateUrl(USER_BASE_URL, `/favorite/${teamId}`),
+    {
+      method: 'post',
+      headers: { authorization: token ? `Bearer ${token}` : undefined }
+    }
+  )
 );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import List from '../../components/List/List';
-import { fetchTeam } from '../../services/MockApi';
+import { fetchTeam, setFavoriteTeam } from '../../services/Api';
 import TeamCard from '../../components/TeamCard/TeamCard';
 import PlayerCard from '../../components/PlayerCard/PlayerCard';
 
@@ -36,7 +36,7 @@ export default class Team extends Component {
       team,
       error,
       players,
-      loading,
+      loading
     } = this.state;
 
     if (loading) {

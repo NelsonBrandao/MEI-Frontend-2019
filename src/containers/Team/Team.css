@@ -4,15 +4,3 @@
   justify-items: center;
   flex-direction: column;
 }
-
-.team img {
-  max-width: 100px;
-  height: 100px;
-}
-
-.team .players,
-.team .games {
-  display: flex;
-  min-width: 800px;
-  flex-direction: column;
-}
