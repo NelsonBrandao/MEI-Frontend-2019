@@ -5,6 +5,7 @@ import TeamCard from '../../components/TeamCard/TeamCard';
 import PlayerCard from '../../components/PlayerCard/PlayerCard';
 
 import './Team.css';
+import FavoriteToggle from '../FavoriteToggle/FavoriteToggle';
 
 export default class Team extends Component {
   state = {
@@ -50,6 +51,10 @@ export default class Team extends Component {
     return (
       <div className="team">
         <TeamCard team={team} />
+
+        <FavoriteToggle
+          teamId={this.props.match.params.id}
+        />
 
         <List
           list={players}
